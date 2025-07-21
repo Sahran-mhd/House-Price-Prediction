@@ -31,16 +31,6 @@ This project solves a regression problem where the goal is to estimate the price
 - Parking availability and furnishing status
 
 ---
-
-## 🎥 Demo
-
-Watch the full walkthrough video on [YouTube](https://youtu.be/WP0hS1CTi5k?si=yYaAOaZVEooZn64P) 
-
-## Screenshots
-
-![Demo Screenshot](https://i.postimg.cc/DzDrRxtq/hpss1.png)
-![Demo Screenshot](https://i.postimg.cc/d1y2F8Yg/hpss2.png)
-
 ---
 
 ## 📁 Project Structure
