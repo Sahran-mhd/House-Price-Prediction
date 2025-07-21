@@ -2,24 +2,7 @@
 
 An end-to-end Machine Learning project that predicts house prices based on property features like area, location attributes, and amenities. This project covers everything from data preprocessing and model training to web deployment using Flask.
 
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=flat) ![Flask](https://img.shields.io/badge/Flask-2.0-lightgrey) ![Machine Learning](https://img.shields.io/badge/Machine%20Learning-RandomForest-orange) ![Deployment](https://img.shields.io/badge/Deployed-Local%20Server-green)
-
 ---
-
-## 📌 Table of Contents
-
-- [Overview](#overview)
-- [Demo](#demo)
-- [Project Structure](#project-structure)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [How to Run](#how-to-run)
-- [Model Performance](#model-performance)
-- [Future Improvements](#future-improvements)
-- [Connect with Me](#connect-with-me)
-
----
-
 ## 📖 Overview
 
 This project solves a regression problem where the goal is to estimate the price of a house based on features like:
@@ -99,39 +82,3 @@ python app.py
 http://127.0.0.1:5000/
 
 ````
-
----
-
-## 📈 Model Performance
-
-```
-Metric	Score
-Train R²	0.8783
-Test R²	0.5917
-Model Size	0.17 MB
-```
-
----
-
-## 🔧 Future Improvements
-
-- Deploy the app on Render or Heroku
-
-- Add visual charts for better insights
-
-- Improve UI/UX with form validations
-
-- Use GridSearchCV for better hyperparameter tuning
-
----
-
-## 🤝 Connect with Me
-
-- 💼 [LinkedIn](https://www.linkedin.com/in/parthiv-majumdar-524046238/)
-
-- 🧠 [YouTube](https://www.youtube.com/@parthivmajumdar6805)
-
-- 💻 [Portfolio](https://portfolio-parthiv.vercel.app/)
-
-
-
