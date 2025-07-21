@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Property Value Forecaster</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #5e60ce, #7400b8);
+      color: #fff;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      margin-bottom: 5px;
+    }
+
+    .header p {
+      font-size: 16px;
+      color: #dcdcdc;
+    }
+
+    .form-box {
+      background: #fff;
+      color: #000;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-box h2 {
+      text-align: center;
+      color: #5e60ce;
+      margin-bottom: 5px;
+    }
+
+    .form-box p {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #666;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .submit-btn {
+      margin-top: 30px;
+      width: 100%;
+      padding: 15px;
+      background-color: #5e60ce;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .submit-btn:hover {
+      background-color: #3a0ca3;
+    }
+
+    #result {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🏠 Property Value Forecaster</h1>
+      <p>Get accurate property price predictions using advanced analytics</p>
+    </div>
+
+    <div class="form-box">
+      <h2>Property Details</h2>
+      <p>Enter your property information to get an instant valuation</p>
+
+      <form id="propertyForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Area (sq ft)</label>
+            <input type="number" name="area" required />
+          </div>
+
+          <div class="form-group">
+            <label>Bedrooms</label>
+            <input type="number" name="bedrooms" required />
+          </div>
+
+          <div class="form-group">
+            <label>Bathrooms</label>
+            <input type="number" name="bathrooms" required />
+          </div>
+
+          <div class="form-group">
+            <label>Stories</label>
+            <input type="number" name="stories" required />
+          </div>
+
+          <div class="form-group">
+            <label>Main Road Access</label>
+            <select name="mainroad" required>
+              <option value="">Select option</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Guest Room</label>
+            <select name="guestroom" required>
+              <option value="">Select option</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Basement</label>
+            <select name="basement" required>
+              <option value="">Select option</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Hot Water Heating</label>
+            <select name="hotwaterheating" required>
+              <option value="">Select option</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Air Conditioning</label>
+            <select name="airconditioning" required>
+              <option value="">Select option</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Parking Spaces</label>
+            <input type="number" name="parking" required />
+          </div>
+
+          <div class="form-group">
+            <label>Preferred Area</label>
+            <select name="prefarea" required>
+              <option value="">Select option</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Furnishing Status</label>
+            <select name="furnishingstatus" required>
+              <option value="">Select status</option>
+              <option value="furnished">Furnished</option>
+              <option value="unfurnished">Unfurnished</option>
+              <option value="semi-furnished">Semi-furnished</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Predict Property Value</button>
+      </form>
+
+      <div id="result"></div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('propertyForm');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch('/predict', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.status === 'success') {
+          resultDiv.innerHTML = `🏷 Predicted Price: <span style="color:blue">$${data.predicted_price.toFixed(2)}</span>`;
+        } else {
+          resultDiv.innerHTML = `❌ Error: ${data.error}`;
+          resultDiv.style.color = 'red';
+        }
+      } catch (err) {
+        resultDiv.innerHTML = `❌ Request failed.`;
+        resultDiv.style.color = 'red';
+      }
+    });
+  </script>
+</body>
+</html>
